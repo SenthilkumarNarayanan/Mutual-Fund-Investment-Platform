@@ -58,4 +58,7 @@
         </plugin>
     </plugins>
 </build>
+<modules>
+    <module>common-exception</module>
+</modules>
 </project>
