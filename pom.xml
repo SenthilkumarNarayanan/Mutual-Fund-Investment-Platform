@@ -16,9 +16,13 @@
     <description>Multi-module Mutual Fund Investment Platform</description>
     <properties>
     <spring-boot.version>4.1.2</spring-boot.version>
+    <spring-cloud.version>2025.1.4</spring-cloud.version>
+
 </properties>
 <dependencyManagement>
     <dependencies>
+            <!-- Spring Boot BOM -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-dependencies</artifactId>
@@ -26,6 +30,17 @@
             <type>pom</type>
             <scope>import</scope>
         </dependency>
+        
+                <!-- Spring Cloud BOM -->
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>${spring-cloud.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+         </dependency>
+	
     </dependencies>
 </dependencyManagement>
 
