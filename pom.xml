@@ -61,6 +61,8 @@
 <modules>
     <module>common-exception</module>
     <module>common-logging</module>
+    <module>api-gateway</module>
+
 
 </modules>
 </project>
