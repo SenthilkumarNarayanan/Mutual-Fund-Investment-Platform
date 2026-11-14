@@ -1,0 +1,18 @@
+
+spring:
+  application:
+    name: user-service
+
+server:
+  port: 8081
+
+logging:
+  level:
+    root: INFO
+    com.mfplatform: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

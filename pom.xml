@@ -62,6 +62,7 @@
     <module>common-exception</module>
     <module>common-logging</module>
     <module>api-gateway</module>
+    <module>user-service</module>
 
 
 </modules>
