@@ -27,6 +27,10 @@ public class InvestorRegistrationRequest {
     )
     private String mobileNumber;
 
+    @Pattern(
+            regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+$",
+            message = "Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character"
+        )
     @NotBlank(message = "Password is required")
     @Size(min = 8, max = 72, message = "Password must contain between 8 and 72 characters")
     private String password;
