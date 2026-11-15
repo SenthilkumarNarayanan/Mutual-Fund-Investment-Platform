@@ -21,6 +21,8 @@ server:
   port: 8081
 
 logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [correlationId=%X{correlationId}] %logger{36} - %msg%n"
   level:
     root: INFO
     com.mfplatform: DEBUG

@@ -69,6 +69,21 @@
     <artifactId>jjwt-jackson</artifactId>
     <scope>runtime</scope>
 </dependency>
+<!-- Shared exception handling library -->
+<dependency>
+    <groupId>com.mfplatform</groupId>
+    <artifactId>common-exception</artifactId>
+    <version>${project.version}</version>
+
+</dependency>
+
+<!-- Shared correlation ID and logging library -->
+<dependency>
+    <groupId>com.mfplatform</groupId>
+    <artifactId>common-logging</artifactId>
+    <version>${project.version}</version>
+
+</dependency>
 </dependencies>
 <build>
     <plugins>
