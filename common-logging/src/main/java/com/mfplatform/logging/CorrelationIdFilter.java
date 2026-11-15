@@ -14,6 +14,8 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -24,6 +26,9 @@ public class CorrelationIdFilter extends OncePerRequestFilter {
 
     private static final String CORRELATION_ID_MDC =
             "correlationId";
+
+    private static final Logger logger =
+            LoggerFactory.getLogger(CorrelationIdFilter.class);
 
     @Override
     protected void doFilterInternal(
@@ -41,6 +46,8 @@ public class CorrelationIdFilter extends OncePerRequestFilter {
 
         try {
             MDC.put(CORRELATION_ID_MDC, correlationId);
+            logger.info("Incoming request: {} {}",
+                    request.getMethod(), request.getRequestURI());
 
             response.setHeader(
                     CORRELATION_ID_HEADER,

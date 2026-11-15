@@ -16,6 +16,10 @@ import com.mfplatform.user.enums.RoleName;
 import com.mfplatform.user.repository.RoleRepository;
 import com.mfplatform.user.repository.UserRepository;
 import com.mfplatform.user.service.InvestorRegistrationService;
+import com.mfplatform.exception.BusinessException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @Service
 public class InvestorRegistrationServiceImpl
@@ -24,6 +28,8 @@ public class InvestorRegistrationServiceImpl
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private static final Logger logger =
+            LoggerFactory.getLogger(InvestorRegistrationServiceImpl.class);
 
     public InvestorRegistrationServiceImpl(
             UserRepository userRepository,
@@ -45,9 +51,13 @@ public class InvestorRegistrationServiceImpl
 
         // 2. Check duplicate email
         if (userRepository.existsByEmail(email)) {
-            throw new IllegalArgumentException(
-                    "Email is already registered");
-        }
+            logger.warn("Investor registration failed: duplicate email");
+
+            throw new BusinessException(
+                    "EMAIL_ALREADY_EXISTS",
+                    "Email is already registered"
+            );
+            }
 
         // 3. Normalize mobile number
         String mobileNumber = request.getMobileNumber();
@@ -62,9 +72,13 @@ public class InvestorRegistrationServiceImpl
         if (mobileNumber != null &&
                 userRepository.existsByMobileNumber(mobileNumber)) {
 
-            throw new IllegalArgumentException(
-                    "Mobile number is already registered");
-        }
+            logger.warn("Investor registration failed: duplicate mobile number");
+
+            throw new BusinessException(
+                    "MOBILE_ALREADY_EXISTS",
+                    "Mobile number is already registered"
+            );
+            }
 
         // 5. Find the existing INVESTOR role
         Role investorRole = roleRepository.findByName(RoleName.INVESTOR)
@@ -91,6 +105,9 @@ public class InvestorRegistrationServiceImpl
 
         // 10. Save user
         User savedUser = userRepository.save(user);
+
+        logger.info("Investor registered successfully. User ID: {}",
+                savedUser.getId());
 
         // 11. Prepare response
         InvestorRegistrationResponse response =
